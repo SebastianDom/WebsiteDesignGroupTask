@@ -30,9 +30,11 @@ function addResultsTitleDiv(jsondata){
     $('#results').empty();
     for(var i=0; i<10;i++){
         var query = jsondata.Search[i].Query;
+        var poster = jsondata.Search[i].Poster;
 
         var food = "<div>"+
                         "<h1>"+query+"</h1>"+
+                        "<img src='"+poster+"'/>"+
                     "</div>"
         $('#results').append(food);
     }
