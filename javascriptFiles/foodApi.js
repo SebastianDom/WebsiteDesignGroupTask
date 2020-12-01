@@ -13,35 +13,23 @@ function getResultsFromFoodAPI(searchterms) {
         var url = "https://api.spoonacular.com/food/products/search?query=" + searchterms + "t&apiKey=432cc93f82914c57a34f8784ea377127&s="
         //use jquery JSON shortcut
         $.getJSON(url, function(jsondata){
-            //handles the results 
-            addResultsTitleDiv(jsondata);
-            });
-}
-
-function addCuisine(jsondata) {
-    $('#results').empty();
-    for (var i=0; i<10; i++){
-        var query = jsondata.Search[i].Query;
-        $('#results').append("<li>"+query+"</li>");
-    }
+            console.log(jsondata);
+            $('#results').empty();
+            for (var i=0; i<jsondata.products.length; i++){
+                var id = jsondata.products[i].title;
+                $('#results').append("<li>"+id+"</li>");
+            }
+        });
 }
 
 function addResultsTitleDiv(jsondata){
     $('#results').empty();
     for(var i=0; i<10;i++){
-        var query = jsondata.Search[i].Query;
-        var poster = jsondata.Search[i].Poster;
-
-        var food = "<div>"+
-                        "<h1>"+query+"</h1>"+
-                        "<img src='"+poster+"'/>"+
-                    "</div>"
-        $('#results').append(food);
+        var title = jsondata.products[i].title;
+        var image = jsondata.products[i].image;
     }
 }
 
 function addItemToList (item){
-    // adds the item to the list
     $("#results").append("<li>"+item+"</li>");
-}
-    
+}    
